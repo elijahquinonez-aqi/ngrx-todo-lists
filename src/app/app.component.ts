@@ -6,6 +6,7 @@ import {
   addList,
   addToDoItem,
   completeItem,
+  completeList,
   editListName,
   newListRequested,
   selectList,
@@ -67,6 +68,10 @@ export class AppComponent implements OnInit {
 
   onItemCompleted(item: ToDoItem) {
     this.store.dispatch(completeItem(item));
+  }
+
+  onListCompleted() {
+    this.store.dispatch(completeList());
   }
 
 }

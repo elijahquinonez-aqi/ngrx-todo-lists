@@ -23,10 +23,30 @@ export class ToDoListCollectionComponent implements OnInit {
     return this._addingNewList;
   }
 
+  private _selectedList: null | undefined | ToDoList = null;
+  @Input() set selectedList(value: ToDoList|null | undefined) {
+    this._selectedList = value;
+  }
+  get selectedList() {
+    return this._selectedList;
+  }
+
   @Output() newListRequested = new EventEmitter();
   @Output() listSelected = new EventEmitter<ToDoList>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  isListSelected(list: ToDoList) {
+    if (!this.selectedList) return false;
+    if (list.name === this.selectedList.name) return true;
+    return false;
+  }
+
+  onListClick(list: ToDoList) {
+    if (this.selectedList && this.selectedList.name === list.name)
+      return this.newListRequested.emit();
+    this.listSelected.emit(list)
+  }
 }

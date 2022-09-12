@@ -10,9 +10,7 @@ import { ToDoList } from './to-do-list.model';
   styleUrls: ['./to-do-list.component.scss'],
 })
 export class ToDoListComponent implements OnInit {
-  @Input() toDoItems: ToDoItem[] = [];
-
-  private _isAdding = true;
+private _isAdding = true;
   @Input() set isAdding(value: null | undefined | boolean) {
     this._isAdding = !!value;
   }
@@ -42,11 +40,20 @@ export class ToDoListComponent implements OnInit {
   @Output() listNameChange = new EventEmitter<string>();
   @Output() saveList = new EventEmitter<ToDoList>();
   @Output() itemCompleted = new EventEmitter<ToDoItem>();
+  @Output() completeList = new EventEmitter();
 
   get canAddList() {
     if (!this.listName) return false;
     if (!this.isNameUnique) return false;
     if (!this.selectedList?.toDoItems.length) return false;
+    return true;
+  }
+
+  get canCompleteList() {
+    if (!this.selectedList) return false;
+    if (this.isAdding) return false;
+    if (this.selectedList.toDoItems.length < 1) return false;
+    if (this.selectedList?.toDoItems.filter(i => !i.isComplete).length > 0) return false;
     return true;
   }
 
@@ -69,8 +76,6 @@ export class ToDoListComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  completeList() {}
 
   reorderList(event: CdkDragDrop<string[]>) {}
 
@@ -112,5 +117,10 @@ export class ToDoListComponent implements OnInit {
     list.name = this.listName;
     list.toDoItems = [...this.selectedList?.toDoItems];
     this.saveList.emit(list);
+  }
+
+  onCompleteListButtonClick() {
+    if (!this.selectedList) return;
+    this.completeList.emit();
   }
 }

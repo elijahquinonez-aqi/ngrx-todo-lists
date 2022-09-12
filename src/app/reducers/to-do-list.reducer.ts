@@ -66,18 +66,10 @@ export const toDoListReducer = createReducer(
     };
   }),
   on(completeList, (state) => {
-    const completedItems = [...state.selectedList?.toDoItems];
-    completedItems.forEach((i) => (i.isComplete = true));
-    const selectedList = new ToDoList();
-    selectedList.name = state.selectedList.name;
-    selectedList.toDoItems = completedItems;
-    const lists = [...state.lists];
-    const i = state.lists.findIndex((l) => l.name === selectedList.name);
-    if (i >= 0) lists.splice(i, 1, selectedList);
     return {
-      lists,
-      selectedList,
-      newListRequested: false,
+      lists: state.lists.filter(l => l.name !== state.selectedList.name),
+      selectedList: new ToDoList(),
+      newListRequested: true,
     };
   }),
   on(addToDoItem, (state, item) => {

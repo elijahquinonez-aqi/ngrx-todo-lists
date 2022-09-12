@@ -44,7 +44,7 @@
         placeholder="Ex. take a moment to relax"
       />
     </mat-form-field>
-    <button (click)="addToDo()" mat-raised-button>add to-do</button>
+    <button (click)="addToDo()" mat-raised-button color="accent">add to-do</button>
   </div>
 
   <button
@@ -52,7 +52,18 @@
     mat-raised-button
     color="primary"
     (click)="onAddListButtonClick()"
+    *ngIf="isAdding"
   >
-    Add List
+    add List
+  </button>
+
+  <button
+    [disabled]="!canCompleteList"
+    mat-raised-button
+    color="warn"
+    *ngIf="!isAdding"
+    (click)="onCompleteListButtonClick()"
+  >
+    complete list
   </button>
 </div>

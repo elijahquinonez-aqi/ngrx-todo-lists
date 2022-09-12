@@ -1,14 +1,8 @@
-.list-item{
-    height: 40px;
-    border-bottom: 1px solid gray;
-    justify-content: center;
-    align-items: center;
+.list_wrapper{
     display: flex;
-    cursor: pointer;
+    flex-direction: column;
+    margin-bottom: 10px;
 }
-
 button{
-    margin: 10px;
-    padding: 10px 20px;
-    background-color: white;
+    margin: 1px;
 }

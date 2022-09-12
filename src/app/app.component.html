@@ -1,10 +1,12 @@
 <div class="body-wrapper">
   <div class="left-panel">
-    <label>Your To Do Lists:</label>
+    <label>Your Lists:</label>
+    <mat-divider></mat-divider>
     <div class="list_panel">
       <ng-container *ngIf="toDoListCollection$ | async as toDoListCollection"
         ><app-to-do-list-collection
           [lists]="toDoListCollection"
+          [selectedList]="selectedList$ | async"
           (newListRequested)="onNewListRequested()"
           (listSelected)="onListSelected($event)"
           [addingNewList]="addingNewList$ | async"
@@ -21,6 +23,7 @@
       (listNameChange)="onNewListNameChanged($event)"
       (saveList)="onSaveList($event)"
       (itemCompleted)="onItemCompleted($event)"
+      (completeList)="onListCompleted()"
     ></app-to-do-list>
   </div>
 </div>

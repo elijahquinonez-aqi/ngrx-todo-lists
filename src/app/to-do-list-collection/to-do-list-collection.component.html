@@ -1,4 +1,7 @@
-<ng-container *ngFor="let list of lists">
-    <div class="list-item" (click)="listSelected.emit(list)">{{list.name}}</div>
-</ng-container>
+<div class="list_wrapper" >
+    <ng-container *ngFor="let list of lists">
+        <button class="list-item" *ngIf="isListSelected(list)" color="accent" mat-raised-button (click)="onListClick(list)">{{list.name}}</button>
+        <button class="list-item" *ngIf="!isListSelected(list)" mat-stroked-button (click)="onListClick(list)">{{list.name}}</button>
+    </ng-container>
+</div>
 <button mat-raised-button [disabled]="addingNewList" color="primary" (click)="newListRequested.emit()">+</button>
