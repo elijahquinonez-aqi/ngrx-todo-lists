@@ -1,0 +1,26 @@
+<div class="body-wrapper">
+  <div class="left-panel">
+    <label>Your To Do Lists:</label>
+    <div class="list_panel">
+      <ng-container *ngIf="toDoListCollection$ | async as toDoListCollection"
+        ><app-to-do-list-collection
+          [lists]="toDoListCollection"
+          (newListRequested)="onNewListRequested()"
+          (listSelected)="onListSelected($event)"
+          [addingNewList]="addingNewList$ | async"
+        ></app-to-do-list-collection
+      ></ng-container>
+    </div>
+  </div>
+  <div class="right-panel">
+    <app-to-do-list
+      [selectedList]="selectedList$ | async"
+      [isAdding]="addingNewList$ | async"
+      [isNameUnique]="isNewListNameUnique$ | async"
+      (addToDoItem)="onItemAddedToList($event)"
+      (listNameChange)="onNewListNameChanged($event)"
+      (saveList)="onSaveList($event)"
+      (itemCompleted)="onItemCompleted($event)"
+    ></app-to-do-list>
+  </div>
+</div>

@@ -1,0 +1,27 @@
+.body-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+}
+
+.left-panel {
+  display: flex;
+  height: calc(100% - 100px);
+  border-right: 2px solid rgba(0, 0, 0, 0.5);
+  width: 300px;
+  text-align: center;
+  flex-direction: column;
+}
+
+.right-panel {
+  display: flex;
+  flex: 1;
+  height: calc(100% - 100px);
+}
+
+.list_panel {
+  flex: 1;
+  margin: 20px;
+  overflow-x: hidden;
+}

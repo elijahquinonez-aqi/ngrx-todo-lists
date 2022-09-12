@@ -1,0 +1,4 @@
+<ng-container *ngFor="let list of lists">
+    <div class="list-item" (click)="listSelected.emit(list)">{{list.name}}</div>
+</ng-container>
+<button mat-raised-button [disabled]="addingNewList" color="primary" (click)="newListRequested.emit()">+</button>

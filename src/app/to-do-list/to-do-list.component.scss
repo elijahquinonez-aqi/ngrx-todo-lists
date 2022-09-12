@@ -1,0 +1,30 @@
+.to-do-list-wrapper {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  height: 52px;
+  width: 350px;
+}
+
+.list_name {
+  width: 100%;
+}
+
+.new_item_name {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.error-message{
+  color: red;
+}
+
+.complete{
+  text-decoration: line-through;
+}

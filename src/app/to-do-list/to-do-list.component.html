@@ -1,0 +1,58 @@
+<div class="to-do-list-wrapper" *ngIf="selectedList">
+  <div class="row">
+    <mat-form-field class="list_name" appearance="fill">
+      <mat-label>your list's name</mat-label>
+      <input
+        [disabled]="!isAdding"
+        [(ngModel)]="listName"
+        (ngModelChange)="onListNameChanged($event)"
+        matInput
+        placeholder="a cool name for your list..."
+      />
+      <mat-hint align="end" class="error-message">{{
+        nameErrorMessage
+      }}</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-selection-list
+    cdkDropList
+    class="to_do_items"
+    (cdkDropListDropped)="reorderList($event)"
+    (selectionChange)="onCompleteItem($event)"
+  >
+    <mat-list-option
+      *ngFor="let toDoItem of selectedList.toDoItems"
+      [class.complete]="toDoItem.isComplete"
+      [checkboxPosition]="'before'"
+      [selected]="toDoItem.isComplete"
+      [value]="toDoItem"
+      cdkDrag
+    >
+      {{ toDoItem.name }}
+    </mat-list-option>
+  </mat-selection-list>
+
+  <div class="row">
+    <mat-form-field class="new_item_name" appearance="fill">
+      <mat-label>new to-do</mat-label>
+      <input
+        [(ngModel)]="newItemName"
+        matInput
+        placeholder="Ex. take a moment to relax"
+      />
+    </mat-form-field>
+    <button (click)="addToDo()" mat-raised-button>add to-do</button>
+  </div>
+
+  <button
+    [disabled]="!canAddList"
+    mat-raised-button
+    color="primary"
+    (click)="onAddListButtonClick()"
+  >
+    Add List
+  </button>
+</div>
